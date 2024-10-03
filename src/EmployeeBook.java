@@ -1,11 +1,8 @@
 import java.util.Arrays;
+import java.util.Objects;
 
 public class EmployeeBook {
     private Employee[] employees = new Employee[10];
-
-    public Employee[] getEmployees() {
-        return employees;
-    }
 
     public boolean addNewEmployee(Employee newEmployee) {
         for (int i = 0; i < employees.length; i++) {
@@ -19,11 +16,9 @@ public class EmployeeBook {
 
     public boolean removeEmployee(int id) {
         int employeeIndex = findEmployeeIndexByID(id);
-        for (int i = 0; i < employees.length; i++) {
-            if (employeeIndex >= 0) {
-                employees[employeeIndex] = null;
-                return true;
-            }
+        if (employeeIndex>=0) {
+            employees[employeeIndex] = null;
+            return true;
         }
         return false;
     }
@@ -40,8 +35,7 @@ public class EmployeeBook {
     public void findEmpoyeesWithSalaryBiggerThan(int number) {
         int count = 0;
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) continue;
-            if (employees[i].getSalary() > number) {
+            if (employees[i] != null && employees[i].getSalary() > number) {
                 System.out.println(employees[i]);
                 count++;
             }
@@ -54,8 +48,7 @@ public class EmployeeBook {
     public void findEmpoyeesWithSalaryLowerThan(int number) {
         int count = 0;
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) continue;
-            if (employees[i].getSalary() < number) {
+            if (employees[i] != null && employees[i].getSalary() < number) {
                 System.out.println(employees[i]);
                 count++;
             }
@@ -67,10 +60,15 @@ public class EmployeeBook {
 
     public void printEmployeesNames(Employee[] employees) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) continue;
-            System.out.printf("%s %s %s %n", employees[i].getLastName(), employees[i].getFirstName(),
-                    employees[i].getMiddleName());
+            if (Objects.nonNull(employees[i])) {
+                System.out.printf("%s %s %s %n", employees[i].getLastName(), employees[i].getFirstName(),
+                        employees[i].getMiddleName());
+            }
         }
+    }
+
+    public void printEmployeesNames() {
+        printEmployeesNames(employees);
     }
 
     public double findAverageSalaryByDepartment(String department) {
@@ -106,6 +104,10 @@ public class EmployeeBook {
         }
     }
 
+    public void printEmployees() {
+        printEmployees(employees);
+    }
+
     public int calculateSalarySum(Employee[] employees) {
         int sum = 0;
         for (int i = 0; i < employees.length; i++) {
@@ -115,12 +117,15 @@ public class EmployeeBook {
         return sum;
     }
 
+    public int calculateSalarySum() {
+        return calculateSalarySum(employees);
+    }
+
     public Object findEmployeeWithMinSalary(Employee[] employees) {
-        int minSalary = employees[0].getSalary();
+        int minSalary = Integer.MAX_VALUE;
         Employee employeeWithMinSalary = null;
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) continue;
-            if (employees[i].getSalary() <= minSalary) {
+            if (Objects.nonNull(employees[i]) && employees[i].getSalary() <= minSalary) {
                 minSalary = employees[i].getSalary();
                 employeeWithMinSalary = employees[i];
             }
@@ -128,12 +133,15 @@ public class EmployeeBook {
         return employeeWithMinSalary;
     }
 
+    public Object findEmployeeWithMinSalary() {
+        return findEmployeeWithMinSalary(employees);
+    }
+
     public Object findEmployeeWithMaxSalary(Employee[] employees) {
-        int maxSalary = employees[0].getSalary();
+        int maxSalary = Integer.MIN_VALUE;
         Employee employeeWithMaxSalary = null;
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) continue;
-            if (employees[i].getSalary() >= maxSalary) {
+            if (Objects.nonNull(employees[i]) && employees[i].getSalary() >= maxSalary) {
                 maxSalary = employees[i].getSalary();
                 employeeWithMaxSalary = employees[i];
             }
@@ -141,9 +149,17 @@ public class EmployeeBook {
         return employeeWithMaxSalary;
     }
 
+    public Object findEmployeeWithMaxSalary() {
+        return findEmployeeWithMaxSalary(employees);
+    }
+
     public double findAverageSalary(Employee[] employees) {
         double averageSalary = Math.round(((double) calculateSalarySum(employees) / findEmployeeCount()) * 100.0) / 100.0;
         return averageSalary;
+    }
+
+    public double findAverageSalary() {
+        return findAverageSalary(employees);
     }
 
     public int findEmployeeCount() {
@@ -165,11 +181,15 @@ public class EmployeeBook {
         }
     }
 
+    public void indexSalary(double percent) {
+        indexSalary(employees, percent);
+    }
+
     public Object findEmployeeByID(int id) {
         int employeeIndex = findEmployeeIndexByID(id);
         if (employeeIndex > 0) {
             return employees[employeeIndex];
         }
-        return "Такого сотрудника нет";
+        return null;
     }
 }

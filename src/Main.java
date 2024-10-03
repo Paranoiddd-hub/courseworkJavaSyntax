@@ -1,35 +1,34 @@
 public class Main {
     public static void main(String[] args) {
         EmployeeBook employeeBook = new EmployeeBook();
-        Employee[] employees = employeeBook.getEmployees();
 
-        employees[0] = new Employee("Иванов", "Иван", "Иванович",
-                10_000, "1");
-        employees[1] = new Employee("Петров", "Петр", "Петрович",
-                11_000, "1");
-        employees[2] = new Employee("Сидоров", "Сидор", "Сидорович",
-                12_000, "1");
-        employees[3] = new Employee("Мажоров", "Мажор", "Мажорович",
-                150_000, "2");
+        employeeBook.addNewEmployee(new Employee("Иванов", "Иван", "Иванович",
+                10_000, "1"));
+        employeeBook.addNewEmployee(new Employee("Петров", "Петр", "Петрович",
+                11_000, "1"));
+        employeeBook.addNewEmployee(new Employee("Сидоров", "Сидор", "Сидорович",
+                12_000, "1"));
+        employeeBook.addNewEmployee(new Employee("Мажоров", "Мажор", "Мажорович",
+                150_000, "2"));
 
-        employeeBook.printEmployees(employees);
+        employeeBook.printEmployees();
         System.out.println();
 
         System.out.printf("Рассходы на заработную плату сотрудников составляют %d рублей %n",
-                employeeBook.calculateSalarySum(employees));
+                employeeBook.calculateSalarySum());
         System.out.println();
 
-        System.out.printf("Сотрудник с минимальной зарплатой:%n %s%n", employeeBook.findEmployeeWithMinSalary(employees));
+        System.out.printf("Сотрудник с минимальной зарплатой:%n %s%n", employeeBook.findEmployeeWithMinSalary());
         System.out.println();
 
-        System.out.printf("Сотрудник с максимальной зарплатой:%n %s%n", employeeBook.findEmployeeWithMaxSalary(employees));
+        System.out.printf("Сотрудник с максимальной зарплатой:%n %s%n", employeeBook.findEmployeeWithMaxSalary());
         System.out.println();
 
-        System.out.printf("Средняя зарплата составляет %.0f %n", employeeBook.findAverageSalary(employees));
+        System.out.printf("Средняя зарплата составляет %.0f %n", employeeBook.findAverageSalary());
         System.out.println();
 
         System.out.println("Список ФИО всех сотрудников:");
-        employeeBook.printEmployeesNames(employees);
+        employeeBook.printEmployeesNames();
         System.out.println();
 
 
@@ -38,10 +37,10 @@ public class Main {
         System.out.println("\t Повышенная сложность");
 
         System.out.println("\t Текущие зарплаты:");
-        employeeBook.printEmployees(employees);
+        employeeBook.printEmployees();
         System.out.println("\t Повысили зарплаты на 10%");
-        employeeBook.indexSalary(employees, 10);
-        employeeBook.printEmployees(employees);
+        employeeBook.indexSalary(10);
+        employeeBook.printEmployees();
         System.out.println();
 
         System.out.printf("Сотрудник с минимальной зарплатой по отделу \"1\" %s %n",
@@ -82,18 +81,21 @@ public class Main {
 
         // Очень сложно
         System.out.println("Текущие сотрудники:");
-        employeeBook.printEmployees(employees);
+        employeeBook.printEmployees();
         System.out.println("Добавляем нового сотрудника Новичкова");
         Employee newEmployee = new Employee("Новичков", "Новичок", "Новичковович", 10, "2");
         System.out.println(employeeBook.addNewEmployee(newEmployee));
-        employeeBook.printEmployees(employees);
+        employeeBook.printEmployees();
 
         System.out.println("Удаляем сотрудника Иванова под id 1");
         System.out.println(employeeBook.removeEmployee(1));
-        employeeBook.printEmployees(employees);
+        employeeBook.printEmployees();
         System.out.println();
 
         System.out.println("Ищем сотрудника по id 2");
         System.out.println(employeeBook.findEmployeeByID(2));
+
+        System.out.println("Math.round(5.137344)/100.0 = " + Math.round(5.137344) / 100.0);
+        System.out.println("Math.round(5.137344/100.0*100.0)/100.0 = " + Math.round(5.137344 / 100.0 * 100.0) / 100.0);
     }
 }
