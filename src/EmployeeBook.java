@@ -7,7 +7,7 @@ public class EmployeeBook {
         return employees;
     }
 
-    public boolean addNewEmployee(Employee[] employees, Employee newEmployee) {
+    public boolean addNewEmployee(Employee newEmployee) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) {
                 employees[i] = newEmployee;
@@ -17,8 +17,8 @@ public class EmployeeBook {
         return false;
     }
 
-    public boolean removeEmployee(Employee[] employees, int id) {
-        int employeeIndex = findEmployeeIndexByID(employees, id);
+    public boolean removeEmployee(int id) {
+        int employeeIndex = findEmployeeIndexByID(id);
         for (int i = 0; i < employees.length; i++) {
             if (employeeIndex >= 0) {
                 employees[employeeIndex] = null;
@@ -28,7 +28,7 @@ public class EmployeeBook {
         return false;
     }
 
-    public int findEmployeeIndexByID(Employee[] employees, int id) {
+    public int findEmployeeIndexByID(int id) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getId() == id) {
                 return i;
@@ -37,7 +37,7 @@ public class EmployeeBook {
         return -1;
     }
 
-    public void findEmpoyeesWithSalaryBiggerThan(Employee[] employees, int number) {
+    public void findEmpoyeesWithSalaryBiggerThan(int number) {
         int count = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) continue;
@@ -51,7 +51,7 @@ public class EmployeeBook {
         }
     }
 
-    public void findEmpoyeesWithSalaryLowerThan(Employee[] employees, int number) {
+    public void findEmpoyeesWithSalaryLowerThan(int number) {
         int count = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) continue;
@@ -73,12 +73,11 @@ public class EmployeeBook {
         }
     }
 
-    public double findAverageSalaryByDepartment(Employee[] employees, String department) {
-        double averageSalaryByDepartment = findAverageSalary(findEmployeesByDepartment(employees, department));
-        return averageSalaryByDepartment;
+    public double findAverageSalaryByDepartment(String department) {
+        return findAverageSalary(findEmployeesByDepartment(department));
     }
 
-    public Employee[] findEmployeesByDepartment(Employee[] employees, String department) {
+    public Employee[] findEmployeesByDepartment(String department) {
         Employee[] byDepartment = new Employee[employees.length];
         int j = 0;
         for (int i = 0; i < employees.length; i++) {
@@ -90,13 +89,13 @@ public class EmployeeBook {
         return byDepartment;
     }
 
-    public Object findEmployeeWithMinSalarybyDepartment(Employee[] employees, String department) {
-        Employee[] employeesByDepartment = findEmployeesByDepartment(employees, department);
+    public Object findEmployeeWithMinSalarybyDepartment(String department) {
+        Employee[] employeesByDepartment = findEmployeesByDepartment(department);
         return findEmployeeWithMinSalary(employeesByDepartment);
     }
 
-    public Object findEmployeeWithMaxSalarybyDepartment(Employee[] employees, String department) {
-        Employee[] employeesByDepartment = findEmployeesByDepartment(employees, department);
+    public Object findEmployeeWithMaxSalarybyDepartment(String department) {
+        Employee[] employeesByDepartment = findEmployeesByDepartment(department);
         return findEmployeeWithMaxSalary(employeesByDepartment);
     }
 
@@ -143,11 +142,11 @@ public class EmployeeBook {
     }
 
     public double findAverageSalary(Employee[] employees) {
-        double averageSalary = Math.round(((double) calculateSalarySum(employees) / findEmployeeCount(employees)) * 100.0) / 100.0;
+        double averageSalary = Math.round(((double) calculateSalarySum(employees) / findEmployeeCount()) * 100.0) / 100.0;
         return averageSalary;
     }
 
-    public int findEmployeeCount(Employee[] employees) {
+    public int findEmployeeCount() {
         int counter = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
@@ -166,8 +165,8 @@ public class EmployeeBook {
         }
     }
 
-    public Object findEmployeeByID(Employee[] employees, int id) {
-        int employeeIndex = findEmployeeIndexByID(employees, id);
+    public Object findEmployeeByID(int id) {
+        int employeeIndex = findEmployeeIndexByID(id);
         if (employeeIndex > 0) {
             return employees[employeeIndex];
         }
