@@ -70,11 +70,11 @@ public class Main {
         System.out.println();
 
         System.out.println("Все сотрудники с зарплатой меньше 20_000:");
-        employeeBook.findEmpoyeesWithSalaryLowerThan(20000);
+        employeeBook.printEmpoyeesWithSalaryLowerThan(20000);
         System.out.println();
 
         System.out.println("Все сотрудники с зарплатой ,больше 13_000:");
-        employeeBook.findEmpoyeesWithSalaryBiggerThan(13000);
+        employeeBook.printEmpoyeesWithSalaryBiggerThan(13000);
         System.out.println();
 
 
@@ -94,8 +94,5 @@ public class Main {
 
         System.out.println("Ищем сотрудника по id 2");
         System.out.println(employeeBook.findEmployeeByID(2));
-
-        System.out.println("Math.round(5.137344)/100.0 = " + Math.round(5.137344) / 100.0);
-        System.out.println("Math.round(5.137344/100.0*100.0)/100.0 = " + Math.round(5.137344 / 100.0 * 100.0) / 100.0);
     }
 }

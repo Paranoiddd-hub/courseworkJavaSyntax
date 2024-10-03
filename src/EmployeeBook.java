@@ -32,7 +32,7 @@ public class EmployeeBook {
         return -1;
     }
 
-    public void findEmpoyeesWithSalaryBiggerThan(int number) {
+    public void printEmpoyeesWithSalaryBiggerThan(int number) {
         int count = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getSalary() > number) {
@@ -45,7 +45,7 @@ public class EmployeeBook {
         }
     }
 
-    public void findEmpoyeesWithSalaryLowerThan(int number) {
+    public void printEmpoyeesWithSalaryLowerThan(int number) {
         int count = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getSalary() < number) {
